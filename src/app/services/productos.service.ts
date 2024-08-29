@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Producto } from '../models/productos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,18 @@ export class ProductosService {
   constructor(public _http: HttpClient) { }
 
   // 3. Función de backend e importar el observable, poner la ruta y la función tal y como esta en el backend
-  ObtenerProductos(): Observable <any> {
+  obtenerProductos(): Observable <any> {
     return this._http.get(this.url + '/productos', { headers: this.headersVariable});
   }
 
+
+  // 5. Agregar producto e importarlo
+  agregarProducto(modeloProducto: Producto): Observable<any> {
+    // convertir el modelo producto a string que sea entendido
+    let parametros = JSON.stringify(modeloProducto);
+    // enviar las cabeceras
+    return this._http.post(this.url + '/agregarProductos', parametros, { headers: this.headersVariable});
+
+  }
 
 }

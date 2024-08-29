@@ -18,13 +18,12 @@
 -->
 <br>
 <div class="container">
-
-
-  <button class="btn btn-primary" type="button">Agregar Producto</button>
-<br>
-<br>
+  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
+    Agregar
+  </button>
+  <br>
+  <br>
   <div class="row">
-
     <div class="col-12 col-md-4" *ngFor="let prod of productosModelGet">
       <div class="card text-center mb-3">
         <div class="card-header">
@@ -43,9 +42,7 @@
       </div>
     </div>
   </div>
-
 </div>
-
 <!-- MODAL VER DATOS EN CARDS
  With supporting text below as a natural lead-in to additional content.
  <div class="card text-center">
@@ -89,3 +86,37 @@
 </div>
 -->
 
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #modal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+            [(ngModel)]="productosModelPost.nombre" autocomplete="off">
+
+          </div>
+          <div class="mb-3">
+            <label for="txtCantidad" class="form-label">Cantidad:</label>
+            <input type="text" id="txtCantidad" name="txtCantidad" class="form-control" autocomplete="off"
+              placeholder="Ingrese la cantidad" name="cantidad" #cantidad="ngModel" [(ngModel)]="productosModelPost.cantidad">
+          </div>
+          <div class="mb-3">
+            <label for="txtPrecio" class="form-label">Precio:</label>
+            <input type="number" id="txtPrecio" name="txtPrecio" class="form-control" autocomplete="off"
+              placeholder="Ingrese el precio del producto" name="precio" #precio="ngModel" [(ngModel)]="productosModelPost.precio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
